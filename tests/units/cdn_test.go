@@ -1,7 +1,7 @@
 package units
 
 import (
-	"Caesar/internal/cdn"
+	"Caesar/internal/pkg/cdn"
 	"Caesar/pkg/utils"
 	"testing"
 )
