@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Django",
+    "keyword": "You're seeing this error because you have <code>DEBUG = True</code> in"
+  },
+  {
+    "name": "Spring",
+    "keyword": "Whitelabel Error Page</h1><p>This application has no explicit mapping for /error, so you are seeing this as a fallback."
+  },
+  {
+    "name": "ThinkPHP",
+    "keyword": "页面错误！请稍后再试"
+  }
+]

@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"time"
 
-	"Caesar/internal/cdn"
 	"Caesar/internal/library/director"
 	"Caesar/internal/library/engine"
 	"Caesar/internal/library/extra"
+	"Caesar/internal/pkg/cdn"
 	"Caesar/internal/relation"
 	"Caesar/internal/report"
 	"Caesar/pkg/builder/generated"
@@ -93,6 +93,13 @@ func Start(target string, typeRequest bool, paths []relation.TagPath) {
 			record.Logger.Warn("The target by waf project " + req.Address)
 			// 睡3秒
 			time.Sleep(3 * time.Second)
+
+		}
+
+		// 检查是否是MVC框架
+		if checkFrame, frame := CheckMVC(body); checkFrame {
+			mvc = true
+			record.Logger.Warn("The target is " + frame)
 
 		}
 

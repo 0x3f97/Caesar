@@ -24,6 +24,9 @@ func SetPaths() {
 	// 设置CDN数据路径
 	relation.Paths.CdnPath = filepath.Join(base, "assets", "cdn")
 
+	// 设置web指纹数据路径
+	relation.Paths.FingerPath = filepath.Join(base, "assets", "fingerprint")
+
 	// 设置配置文件路径
 	if !utils.PathExists(filepath.Join(base, "configs", "config.yml")) {
 		if !utils.PathExists(filepath.Join(base, "config.yml")) {

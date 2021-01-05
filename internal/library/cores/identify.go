@@ -1,11 +1,11 @@
 package cores
 
 import (
-	"net/http"
 	"net/url"
 	"strings"
 
 	"Caesar/internal/library/director"
+	"Caesar/internal/pkg/finger"
 	"Caesar/internal/relation"
 	"Caesar/pkg/utils"
 )
@@ -49,19 +49,20 @@ func CheckWaf(urlAddress string) bool {
 
 }
 
-func CheckCDN(urlAddress string) bool {
-	/*
-		检查地址是否是CDN
-	*/
-
-	return false
-}
-
-func CheckMVC(header http.Header, body []byte) (isMVC bool, frame string) {
+func CheckMVC(body []byte) (MVCApp bool, frame string) {
 	/*
 	   该函数用来判断目标网站是否是MVC框架
 	*/
 
-	return true, ""
+	if apps, err := finger.NewLoads(relation.Paths.FingerPath + "/apps.json").CheckFinger(string(body)); err != nil {
+		return false, frame
+
+	} else {
+		if len(apps) == 0 {
+			return false, frame
+		} else {
+			return true, apps
+		}
+	}
 
 }

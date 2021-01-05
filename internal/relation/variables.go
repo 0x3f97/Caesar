@@ -59,9 +59,14 @@ type PathsMap struct {
 	// The path dir
 	// default is : assets/directory
 	DictDir string
-	// The CDN json dir
+	// The CDN  dir
 	// default is : assets/cdn
 	CdnPath string
+
+	// The Finger  dir
+	// default is : assets/fingerprint
+	FingerPath string
+
 	// Configuration file path
 	// default is : configs/config.yml
 	Config string

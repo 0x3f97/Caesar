@@ -10,21 +10,20 @@ import (
 )
 
 var (
-	goInstance *ipFile
+	goInstance *IPFile
 	once       sync.Once
 )
 
 type ipCDN []string
 
-type ipFile struct {
+// IPFile 是读取CDN ip段的信息
+type IPFile struct {
 	Name string
 }
 
-func (ifc *ipFile) getIP() ([]string, error) {
+func (ifc *IPFile) getIP() (ipCDN, error) {
 	// 读取json文件
 	var info ipCDN
-
-	var cdnList []string
 
 	//ReadFile函数会读取文件的全部内容，并将结果以[]byte类型返回
 	data, err := ioutil.ReadFile(ifc.Name)
@@ -37,15 +36,12 @@ func (ifc *ipFile) getIP() ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	for _, v := range info {
-		cdnList = append(cdnList, v)
 
-	}
-
-	return cdnList, nil
+	return info, nil
 }
 
-func (ifc *ipFile) CheckIPCDN(ip string) bool {
+// CheckIPCDN 用来检查IP地址是否是CDN
+func (ifc *IPFile) CheckIPCDN(ip string) bool {
 
 	ipRange, err := ifc.getIP()
 	if err != nil {
@@ -65,11 +61,11 @@ func (ifc *ipFile) CheckIPCDN(ip string) bool {
 	return false
 }
 
-// 使用go 实现单例模式
-func NewIP(name string) *ipFile {
+// NewIP 使用go 实现单例模式
+func NewIP(name string) *IPFile {
 	if goInstance == nil {
 		once.Do(func() {
-			goInstance = &ipFile{
+			goInstance = &IPFile{
 				Name: name,
 			}
 		})
