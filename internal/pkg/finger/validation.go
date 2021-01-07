@@ -27,7 +27,7 @@ type AppFinger struct {
 }
 
 // 读取指纹
-func (a AppFinger) getFingers() (Fingers, error) {
+func (a *AppFinger) getFingers() (Fingers, error) {
 	var fingers Fingers
 
 	//ReadFile函数会读取文件的全部内容，并将结果以[]byte类型返回
@@ -47,7 +47,7 @@ func (a AppFinger) getFingers() (Fingers, error) {
 }
 
 // CheckFinger 识别程序
-func (a AppFinger) CheckFinger(html string) (result string, errs error) {
+func (a *AppFinger) CheckFinger(html string) (result string, errs error) {
 	fingersManager, err := a.getFingers()
 	if err != nil {
 		record.Logger.Error("Finger file read failed " + err.Error())
